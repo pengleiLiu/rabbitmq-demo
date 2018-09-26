@@ -1,2 +1,2 @@
 # rabbitmq-demo
-learning rabbitmq hh
+learning rabbitmq
