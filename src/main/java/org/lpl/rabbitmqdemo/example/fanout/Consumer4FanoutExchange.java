@@ -1,18 +1,17 @@
-package org.lpl.rabbitmqdemo.example.topic;
+package org.lpl.rabbitmqdemo.example.fanout;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.QueueingConsumer;
 
-
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Created by liupenglei on 2018/9/26.
+ * Created by lpl on 2018/9/26.
  */
-public class Consumer4TopicExchange {
+public class Consumer4FanoutExchange {
 
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
 
@@ -27,11 +26,10 @@ public class Consumer4TopicExchange {
 
         Channel channel = connection.createChannel();
 
-        String exchangeName = "test_topic_exchange";
-        String exchangeType = "topic";
-        String queueName = "test_topic_queue";
-        //String routingKey = "user.*";
-        String routingKey = "user.#";
+        String exchangeName = "test_fanout_exchange";
+        String exchangeType = "fanout";
+        String queueName = "test_fanout_queue";
+        String routingKey = "";
         //声明
         channel.exchangeDeclare(exchangeName,exchangeType,true,false,false,null);
         //声明队列
@@ -50,6 +48,5 @@ public class Consumer4TopicExchange {
             String msg = new String(delivery.getBody());
             System.out.println("收到消息：" + msg);
         }
-
     }
 }
